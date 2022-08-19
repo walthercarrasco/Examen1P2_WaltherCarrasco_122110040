@@ -2,7 +2,7 @@
 package Apex;
 
 
-public class Personajes {
+public abstract class Personajes {
     String nombre;
     int vida;
     int escudo;
@@ -54,5 +54,7 @@ public class Personajes {
     public String toString() {
         return "Personajes{" + "nombre=" + nombre + ", vida=" + vida + ", escudo=" + escudo + ", arma=" + arma.getNombre() + '}';
     }
+    
+    public abstract void ataque();
     
 }

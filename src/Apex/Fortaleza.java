@@ -43,6 +43,11 @@ public class Fortaleza extends Personajes{
     public void setArma(Arma arma) {
         this.arma = arma;
     }
+
+    @Override
+    public void ataque() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

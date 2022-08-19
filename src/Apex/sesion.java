@@ -7,6 +7,7 @@ package Apex;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import java.util.Random;
 
 /**
  *
@@ -52,6 +53,7 @@ public class sesion extends javax.swing.JFrame {
         bt_ingresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Iniciar Sesion");
 
         login.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
         login.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -136,8 +138,20 @@ public class sesion extends javax.swing.JFrame {
             if(contra.isBlank() || contra.isEmpty()){
                 JOptionPane.showMessageDialog(this, "Escriba una contraseña", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }else{
-                this.setVisible(false);
-                Menu m = new Menu();
+                Usuario usua = new Usuario();
+                if(usuarios.get(0).getNombre().equals(tf_usuario.getText()) && usuarios.get(0).getContra().equals(tf_contra.getText())){
+                    usua = usuarios.get(0);
+                }else if(usuarios.get(1).getNombre().equals(tf_usuario.getText()) && usuarios.get(1).getContra().equals(tf_contra.getText())){
+                    usua = usuarios.get(1);
+                }else if(usuarios.get(2).getNombre().equals(tf_usuario.getText()) && usuarios.get(2).getContra().equals(tf_contra.getText())){
+                    usua = usuarios.get(2);
+                }else{
+                    usua.setContra(tf_contra.getText());
+                    usua.setID(1+r.nextInt(100));
+                    usua.setNombre(tf_usuario.getText());
+                    usua.setPersonaje(personajes.get(0));
+                }
+                Menu m = new Menu(usuarios, armas, personajes, usua);
                 m.setVisible(true);
             }
         }
@@ -184,6 +198,7 @@ public class sesion extends javax.swing.JFrame {
     ArrayList<Usuario> usuarios = new ArrayList<>();
     ArrayList<Arma> armas = new ArrayList<>();
     ArrayList<Personajes> personajes = new ArrayList<>();
+    Random r = new Random();
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_ingresar;
