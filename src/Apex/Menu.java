@@ -353,7 +353,9 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void b_seleccionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_seleccionarMouseClicked
-        
+        jugador.setPersonaje((Personajes)cb_personajes.getSelectedItem());
+        usuarios.get(0).setPersonaje((Personajes)cb_personajes.getSelectedItem());
+        JOptionPane.showMessageDialog(this, "Personaje Cambiado a " + ((Personajes)cb_personajes.getSelectedItem()).getNombre());
     }//GEN-LAST:event_b_seleccionarMouseClicked
 
     private void tf_danoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_danoActionPerformed

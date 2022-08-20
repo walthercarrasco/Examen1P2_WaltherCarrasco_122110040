@@ -140,16 +140,21 @@ public class sesion extends javax.swing.JFrame {
             }else{
                 Usuario usua = new Usuario();
                 if(usuarios.get(0).getNombre().equals(tf_usuario.getText()) && usuarios.get(0).getContra().equals(tf_contra.getText())){
-                    usua = usuarios.get(0);
+                    usua = usuarios.get(0);                    
                 }else if(usuarios.get(1).getNombre().equals(tf_usuario.getText()) && usuarios.get(1).getContra().equals(tf_contra.getText())){
                     usua = usuarios.get(1);
+                    usuarios.set(0, usua);
+                    usuarios.remove(2);
                 }else if(usuarios.get(2).getNombre().equals(tf_usuario.getText()) && usuarios.get(2).getContra().equals(tf_contra.getText())){
                     usua = usuarios.get(2);
+                    usuarios.set(0, usua);
+                    usuarios.remove(3);
                 }else{
                     usua.setContra(tf_contra.getText());
                     usua.setID(1+r.nextInt(100));
                     usua.setNombre(tf_usuario.getText());
                     usua.setPersonaje(personajes.get(0));
+                    usuarios.set(0, usua);
                 }
                 Menu m = new Menu(usuarios, armas, personajes, usua);
                 m.setVisible(true);
