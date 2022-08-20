@@ -2,6 +2,7 @@
 package Apex;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -50,6 +51,8 @@ public class Menu extends javax.swing.JFrame {
         b_comenzar = new javax.swing.JButton();
         tf_atacar = new javax.swing.JTextField();
         b_atacar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        lb_restantes = new javax.swing.JLabel();
         p_crear = new javax.swing.JPanel();
         lb_nombre = new javax.swing.JLabel();
         tf_nombre = new javax.swing.JTextField();
@@ -165,6 +168,15 @@ public class Menu extends javax.swing.JFrame {
         });
 
         b_atacar.setText("Atacar");
+        b_atacar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_atacarMouseClicked(evt);
+            }
+        });
+
+        jLabel5.setText("Restantes: ");
+
+        lb_restantes.setText(" ");
 
         javax.swing.GroupLayout p_jugarLayout = new javax.swing.GroupLayout(p_jugar);
         p_jugar.setLayout(p_jugarLayout);
@@ -173,19 +185,31 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(p_jugarLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(p_jugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(b_comenzar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(p_jugarLayout.createSequentialGroup()
-                        .addComponent(tf_atacar, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b_atacar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                        .addGroup(p_jugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(p_jugarLayout.createSequentialGroup()
+                                .addComponent(tf_atacar, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(b_atacar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(39, Short.MAX_VALUE))
+                    .addGroup(p_jugarLayout.createSequentialGroup()
+                        .addComponent(b_comenzar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lb_restantes, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69))))
         );
         p_jugarLayout.setVerticalGroup(
             p_jugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(p_jugarLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(b_comenzar)
+                .addGroup(p_jugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(b_comenzar)
+                    .addGroup(p_jugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(lb_restantes)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -405,7 +429,7 @@ public class Menu extends javax.swing.JFrame {
         if(cb_tipo.getSelectedIndex() == 0){
             personajes.add(new Fortaleza(tf_nombre.getText(), Integer.parseInt(tf_vida.getText()), Integer.parseInt(tf_escudo.getText()), ((Arma)cb_arma.getSelectedItem())));
         }else if(cb_tipo.getSelectedIndex() == 1){
-            personajes.add(new Restreador(tf_nombre.getText(), Integer.parseInt(tf_vida.getText()), Integer.parseInt(tf_escudo.getText()), ((Arma)cb_arma.getSelectedItem())));
+            personajes.add(new Rastreador(tf_nombre.getText(), Integer.parseInt(tf_vida.getText()), Integer.parseInt(tf_escudo.getText()), ((Arma)cb_arma.getSelectedItem())));
         }else{
             personajes.add(new Medico(tf_nombre.getText(), Integer.parseInt(tf_vida.getText()), Integer.parseInt(tf_escudo.getText()), ((Arma)cb_arma.getSelectedItem())));
         }
@@ -451,14 +475,25 @@ public class Menu extends javax.swing.JFrame {
         for (Usuario usuario : usuarios) {
             ta_print.append("El Jugador " + usuario.getNombre() + "["+ usuario.getID() + "]" + " se acaba de unir a la partida\n");
         }
+        ta_print.append("\n");
+        lb_restantes.setText("" + (usuarios.size()));
+        this.comienzo = new Date();
     }//GEN-LAST:event_b_comenzarMouseClicked
 
+    private void b_atacarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_atacarMouseClicked
+        int player = Integer.parseInt(tf_atacar.getText());
+        
+    }//GEN-LAST:event_b_atacarMouseClicked
+
+    
 
     ArrayList<Usuario> usuarios = new ArrayList<>();
     ArrayList<Arma> armas = new ArrayList<>();
     ArrayList<Personajes> personajes = new ArrayList<>(); 
     Usuario jugador;
     Random r = new Random();
+    Date comienzo;
+    Date termina;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_atacar;
@@ -473,12 +508,14 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb_arma;
     private javax.swing.JLabel lb_crear;
     private javax.swing.JLabel lb_escudo;
     private javax.swing.JLabel lb_nombre;
     private javax.swing.JLabel lb_presicion;
+    private javax.swing.JLabel lb_restantes;
     private javax.swing.JLabel lb_tipo;
     private javax.swing.JLabel lb_usuario;
     private javax.swing.JLabel lb_vida;

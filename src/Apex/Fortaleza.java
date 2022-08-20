@@ -12,41 +12,30 @@ public class Fortaleza extends Personajes{
         super(nombre, vida, escudo, arma);
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getVida() {
-        return vida;
-    }
-
-    public void setVida(int vida) {
-        this.vida = vida;
-    }
-
-    public int getEscudo() {
-        return escudo;
-    }
-
-    public void setEscudo(int escudo) {
-        this.escudo = escudo;
-    }
-
-    public Arma getArma() {
-        return arma;
-    }
-
-    public void setArma(Arma arma) {
-        this.arma = arma;
-    }
-
     @Override
-    public void ataque() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Personajes ataque(Usuario atacante, Usuario atacado) {
+        if(atacado.getPersonaje().getEscudo() > 0){
+            if(atacado.getPersonaje() instanceof Fortaleza){
+                atacado.getPersonaje().setEscudo((int) (atacado.getPersonaje().getEscudo() - (0.15 * atacante.getPersonaje().getArma().getDano())));
+            }else{
+                if(atacado.getPersonaje() instanceof Medico){
+                    atacado.getPersonaje().setEscudo((int) (atacado.getPersonaje().getEscudo() - ((0.15 * atacante.getPersonaje().getArma().getDano()) + atacante.getPersonaje().getArma().getDano())));
+                }else{
+                    atacado.getPersonaje().setEscudo(atacado.getPersonaje().getEscudo() - atacante.getPersonaje().getArma().getDano());
+                }
+            }
+        }else{
+            if(atacado.getPersonaje() instanceof Fortaleza){
+                atacado.getPersonaje().setVida((int) (atacado.getPersonaje().getVida() - (0.15 * atacante.getPersonaje().getArma().getDano())));
+            }else{
+                if(atacado.getPersonaje() instanceof Medico){
+                    atacado.getPersonaje().setVida((int) (atacado.getPersonaje().getVida() - ((0.15 * atacante.getPersonaje().getArma().getDano()) + atacante.getPersonaje().getArma().getDano())));
+                }else{
+                    atacado.getPersonaje().setVida(atacado.getPersonaje().getVida() - atacante.getPersonaje().getArma().getDano());
+                }
+            }            
+        }
+        return atacado.getPersonaje();
     }
     
     

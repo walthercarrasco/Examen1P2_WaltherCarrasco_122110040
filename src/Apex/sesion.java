@@ -24,7 +24,7 @@ public class sesion extends javax.swing.JFrame {
         usuarios.add(new Usuario("Lechuga", 543, "contrasena", personajes.get(0)));
         
         armas.add(new Arma("PeaceFinder", 30, 40));
-        personajes.add(new Restreador("Vantage", 100, 50, armas.get(1)));
+        personajes.add(new Rastreador("Vantage", 100, 50, armas.get(1)));
         usuarios.add(new Usuario("Loco Bryan", 23, "contrasena", personajes.get(1)));
         
         armas.add(new Arma("Carabina", 15, 90));

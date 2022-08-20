@@ -3,10 +3,10 @@ package Apex;
 
 
 public abstract class Personajes {
-    String nombre;
-    int vida;
-    int escudo;
-    Arma arma;
+    private String nombre;
+    private int vida;
+    private int escudo;
+    private Arma arma;
 
     public Personajes(String nombre, int vida, int escudo, Arma arma) {
         this.nombre = nombre;
@@ -55,6 +55,6 @@ public abstract class Personajes {
         return "Personajes{" + "nombre=" + nombre + ", vida=" + vida + ", escudo=" + escudo + ", arma=" + arma.getNombre() + '}';
     }
     
-    public abstract void ataque();
+    public abstract Personajes ataque(Usuario atacante, Usuario atacado);
     
 }
