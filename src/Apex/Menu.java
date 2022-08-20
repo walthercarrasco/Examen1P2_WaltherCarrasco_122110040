@@ -2,6 +2,7 @@
 package Apex;
 
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -45,7 +46,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         p_jugar = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        ta_print = new javax.swing.JTextArea();
         b_comenzar = new javax.swing.JButton();
         tf_atacar = new javax.swing.JTextField();
         b_atacar = new javax.swing.JButton();
@@ -102,7 +103,7 @@ public class Menu extends javax.swing.JFrame {
         lb_usuario.setText("Usuario: ");
 
         tf_mostrarusuario.setForeground(new java.awt.Color(0, 0, 0));
-        tf_mostrarusuario.setText(""+jugador.getNombre());
+        tf_mostrarusuario.setText(usuarios.get(0).getNombre());
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel3.setText("UserID:");
@@ -152,11 +153,16 @@ public class Menu extends javax.swing.JFrame {
 
         tp_menu.addTab("Seleccionar", p_seleccionar);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        ta_print.setColumns(20);
+        ta_print.setRows(5);
+        jScrollPane1.setViewportView(ta_print);
 
         b_comenzar.setText("Comenzar");
+        b_comenzar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_comenzarMouseClicked(evt);
+            }
+        });
 
         b_atacar.setText("Atacar");
 
@@ -420,11 +426,39 @@ public class Menu extends javax.swing.JFrame {
         tf_dano.setText("");
     }//GEN-LAST:event_b_creararmaMouseClicked
 
+    private void b_comenzarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_comenzarMouseClicked
+        int i = 0;
+        while(i < 60){
+            boolean val = true;
+            int id = 1+r.nextInt(500);
+            for(int j = 0; i < usuarios.size(); i++){
+                if(usuarios.get(i).getID() == id){
+                    val = false;
+                }
+            }
+            if(val == true){
+                i++;
+                String name = "";
+                for(int j = 0; j < 5; j++){
+                    int ran = 97+r.nextInt(25);
+                    char c = (char) ran;
+                    name += c;
+                }
+                int p = 0+r.nextInt(personajes.size()-1);
+                usuarios.add(new Usuario(name, id, personajes.get(p)));
+            }
+        }
+        for (Usuario usuario : usuarios) {
+            ta_print.append("El Jugador " + usuario.getNombre() + "["+ usuario.getID() + "]" + " se acaba de unir a la partida\n");
+        }
+    }//GEN-LAST:event_b_comenzarMouseClicked
+
 
     ArrayList<Usuario> usuarios = new ArrayList<>();
     ArrayList<Arma> armas = new ArrayList<>();
     ArrayList<Personajes> personajes = new ArrayList<>(); 
     Usuario jugador;
+    Random r = new Random();
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_atacar;
@@ -440,7 +474,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lb_arma;
     private javax.swing.JLabel lb_crear;
     private javax.swing.JLabel lb_escudo;
@@ -452,6 +485,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel p_crear;
     private javax.swing.JPanel p_jugar;
     private javax.swing.JPanel p_seleccionar;
+    private javax.swing.JTextArea ta_print;
     private javax.swing.JTextField tf_atacar;
     private javax.swing.JTextField tf_dano;
     private javax.swing.JTextField tf_escudo;

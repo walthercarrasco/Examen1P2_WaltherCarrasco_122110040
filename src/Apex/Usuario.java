@@ -10,6 +10,12 @@ public class Usuario {
     public Usuario() {
     }
 
+    public Usuario(String nombre, int ID, Personajes personaje) {
+        this.nombre = nombre;
+        this.ID = ID;
+        this.personaje = personaje;
+    }
+
     public Usuario(String nombre, int ID, String contra, Personajes personaje) {
         this.nombre = nombre;
         this.ID = ID;
