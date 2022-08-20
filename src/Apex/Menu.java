@@ -3,6 +3,7 @@ package Apex;
 
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -73,6 +74,11 @@ public class Menu extends javax.swing.JFrame {
         setTitle("Menu");
 
         tp_menu.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.black, null));
+        tp_menu.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tp_menuStateChanged(evt);
+            }
+        });
         tp_menu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tp_menuMouseClicked(evt);
@@ -221,11 +227,21 @@ public class Menu extends javax.swing.JFrame {
         b_creararma.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         b_creararma.setForeground(new java.awt.Color(0, 0, 0));
         b_creararma.setText("Crear Arma");
+        b_creararma.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_creararmaMouseClicked(evt);
+            }
+        });
 
         b_crear.setBackground(new java.awt.Color(0, 153, 153));
         b_crear.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         b_crear.setForeground(new java.awt.Color(0, 0, 0));
         b_crear.setText("Crear Personaje");
+        b_crear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_crearMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout p_crearLayout = new javax.swing.GroupLayout(p_crear);
         p_crear.setLayout(p_crearLayout);
@@ -349,13 +365,58 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_p_crearMouseClicked
 
     private void tp_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tp_menuMouseClicked
+      
+    }//GEN-LAST:event_tp_menuMouseClicked
+
+    private void tp_menuStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tp_menuStateChanged
+        if(tp_menu.getSelectedIndex() == 2){
+            cb_arma.removeAllItems();
+            DefaultComboBoxModel modeloarma = (DefaultComboBoxModel) cb_arma.getModel();
+            for (Arma arma : armas) {
+                modeloarma.addElement(arma);
+            }
+            cb_arma.setModel(modeloarma);  
+
+            cb_tipo.removeAllItems();
+            DefaultComboBoxModel modelotipo = (DefaultComboBoxModel) cb_tipo.getModel();
+            modelotipo.addElement(new String("Fortaleza"));
+            modelotipo.addElement(new String("Rastreador"));
+            modelotipo.addElement(new String("Medico"));
+            cb_tipo.setModel(modelotipo);
+        }else if(tp_menu.getSelectedIndex() == 0){
+            cb_personajes.removeAllItems();
+            DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_personajes.getModel();
+            for (Personajes personaje : personajes) {
+                modelo.addElement(personaje);
+            }
+            cb_personajes.setModel(modelo);
+        }
+    }//GEN-LAST:event_tp_menuStateChanged
+
+    private void b_crearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_crearMouseClicked
+        if(cb_tipo.getSelectedIndex() == 0){
+            personajes.add(new Fortaleza(tf_nombre.getText(), Integer.parseInt(tf_vida.getText()), Integer.parseInt(tf_escudo.getText()), ((Arma)cb_arma.getSelectedItem())));
+        }else if(cb_tipo.getSelectedIndex() == 1){
+            personajes.add(new Restreador(tf_nombre.getText(), Integer.parseInt(tf_vida.getText()), Integer.parseInt(tf_escudo.getText()), ((Arma)cb_arma.getSelectedItem())));
+        }else{
+            personajes.add(new Medico(tf_nombre.getText(), Integer.parseInt(tf_vida.getText()), Integer.parseInt(tf_escudo.getText()), ((Arma)cb_arma.getSelectedItem())));
+        }
+        JOptionPane.showMessageDialog(this, "Personaje Agregado", "Personaje", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_b_crearMouseClicked
+
+    private void b_creararmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_creararmaMouseClicked
+        armas.add(new Arma(tf_nombrearma.getText(), Integer.parseInt(tf_dano.getText()), Integer.parseInt(tf_presicion.getText())));
         cb_arma.removeAllItems();
         DefaultComboBoxModel modeloarma = (DefaultComboBoxModel) cb_arma.getModel();
         for (Arma arma : armas) {
-            modeloarma.addElement(arma.getNombre());
+            modeloarma.addElement(arma);
         }
-        cb_arma.setModel(modeloarma);        
-    }//GEN-LAST:event_tp_menuMouseClicked
+        cb_arma.setModel(modeloarma);
+        JOptionPane.showMessageDialog(this, "Arma Agregada", "Arma", JOptionPane.INFORMATION_MESSAGE);
+        tf_nombre.setText("");
+        tf_presicion.setText("");
+        tf_dano.setText("");
+    }//GEN-LAST:event_b_creararmaMouseClicked
 
 
     ArrayList<Usuario> usuarios = new ArrayList<>();

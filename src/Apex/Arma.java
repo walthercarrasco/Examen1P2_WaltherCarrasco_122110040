@@ -39,5 +39,10 @@ public class Arma {
         this.presicion = presicion;
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
     
 }

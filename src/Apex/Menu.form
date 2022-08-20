@@ -53,6 +53,7 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="tp_menuStateChanged"/>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tp_menuMouseClicked"/>
       </Events>
 
@@ -487,6 +488,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Crear Arma"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="b_creararmaMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="b_crear">
               <Properties>
@@ -501,6 +505,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Crear Personaje"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="b_crearMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
